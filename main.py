@@ -1,9 +1,30 @@
+import os
+import time
+
+
+def test():
+    directory = os.getcwd()
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            filepath = os.path.join(root, file)
+            filetime = os.path.getmtime(filepath)
+            formatted_time = time.strftime("%d.%m.%Y %H:%M", time.localtime(filetime))
+            filesize = os.path.getsize(filepath)
+            parent_dir = os.path.dirname(filepath)
+            print(f'Обнаружен файл: {file}, Путь: {filepath}, Размер: {filesize} байт, Время изменения: {formatted_time}, Родительская директория: {parent_dir}')
+
+
+if __name__ == '__main__':
+    test()
+
+
 """
 2023/11/19 00:00|Домашнее задание по теме "Файлы в операционной системе".
 Цель задания:
 
 Освоить работу с файловой системой в Python, используя модуль os.
-Научиться применять методы os.walk, os.path.join, os.path.getmtime, os.path.dirname, os.path.getsize и использование модуля time для корректного отображения времени.
+Научиться применять методы os.walk, os.path.join, os.path.getmtime, os.path.dirname, 
+os.path.getsize и использование модуля time для корректного отображения времени.
 
 Задание:
 
@@ -26,8 +47,6 @@ for root, dirs, files in os.walk(directory):
     filesize = ?
     parent_dir = ?
     print(f'Обнаружен файл: {file}, Путь: {filepath}, Размер: {filesize} байт, Время изменения: {formatted_time}, Родительская директория: {parent_dir}')
-
-
 
 Так как в разных операционных системах разная схема расположения папок, тестировать проще всего в папке проекта (directory = “.”)
 Пример возможного вывода:
